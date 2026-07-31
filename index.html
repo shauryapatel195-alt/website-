@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STANFLEX — Multi-Ply Expansion Joints | Standard Precision Bellows</title>
+  <meta name="description" content="STANFLEX multi-ply metallic bellows expansion joints — 15 mm to 5 m diameter, standard designs to 10 kg/cm², special designs to 100 kg/cm², refractory lined to 1300 °C. Designed, manufactured and pressure-tested in Vadodara, India.">
+  <meta name="theme-color" content="#17100a">
+
+  <!-- Favicon: the STANFLEX asterisk mark as an inline SVG data URI (no extra request) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e25a22'/%3E%3Cg stroke='%23fff7ef' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7'/%3E%3C/g%3E%3C/svg%3E">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!--
+    Import map: lets the ES-module 3D code (and OrbitControls, which internally
+    does `import ... from 'three'`) resolve to the locally vendored Three.js build.
+    Everything is served from this repo — no CDN dependency at runtime.
+  -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.min.js" } }
+  </script>
+</head>
+<body>
+
+<a class="skip-link" href="#company">Skip to content</a>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="#top" aria-label="STANFLEX home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-word">STANFLEX</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="#company">Company</a>
+      <a href="#engineering">Engineering</a>
+      <a href="#lab">3D&nbsp;Lab</a>
+      <a href="#configurations">Configurations</a>
+      <a href="#range">Range</a>
+      <a href="#quality">Quality</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-solid header-cta" href="mailto:stanflex@standardprecisionbellows.com?subject=Expansion%20joint%20enquiry">Get a quote</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============================= HERO ============================= -->
+<section class="hero" id="hero">
+  <!-- The 3D hero model renders into this canvas; it sits behind the copy.
+       Dragging on the right half rotates the joint (OrbitControls, zoom disabled
+       so the page can still scroll). -->
+  <div class="hero-canvas-wrap" id="hero-canvas-wrap" aria-hidden="true">
+    <canvas id="hero-canvas"></canvas>
+  </div>
+
+  <div class="shell hero-inner">
+    <div class="hero-copy">
+      <p class="kicker reveal"><span class="kicker-bar"></span>Stanflex product catalogue · Edition 2026</p>
+      <h1 class="hero-title">
+        <span class="line">Multi-ply</span>
+        <span class="line">expansion <em>joints</em></span>
+      </h1>
+      <p class="hero-sub reveal">Built around your requirement — your sizes, your pressures, your temperatures.</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-solid" href="#lab">Explore the joint in 3D</a>
+        <a class="btn btn-ghost" href="#range">Standard range</a>
+      </div>
+      <p class="hero-hint reveal" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M3 12h18"/><path d="m8 7 4-4 4 4M8 17l4 4 4-4M7 8l-4 4 4 4M17 8l4 4-4 4"/></svg> Drag the model to rotate it</p>
+    </div>
+  </div>
+
+  <!-- Three brand pillars, straight from the catalogue cover -->
+  <div class="shell hero-pillars" data-stagger>
+    <article class="pillar">
+      <h3>Your requirement first</h3>
+      <p>Standard or fully custom — every joint is engineered around your line, your medium and your duty.</p>
+    </article>
+    <article class="pillar">
+      <h3>Tested before dispatch</h3>
+      <p>Every bellows is inspected and pressure-tested at our works before it reaches you.</p>
+    </article>
+    <article class="pillar">
+      <h3>With you throughout</h3>
+      <p>From enquiry and joint selection to installation guidance — we stay with you at every step.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============================= STATS BAND ============================= -->
+<div class="stats-band" id="stats">
+  <div class="shell stats-grid" data-stagger>
+    <div class="stat">
+      <span class="stat-num">15&nbsp;mm&nbsp;–&nbsp;5&nbsp;m</span>
+      <span class="stat-label">bellows supplied across the full diameter range</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><span class="count" data-count="100">0</span>&nbsp;kg/cm²</span>
+      <span class="stat-label">special reinforced high-pressure designs</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><span class="count" data-count="1300">0</span>&nbsp;°C</span>
+      <span class="stat-label">refractory-lined joints for extreme temperatures</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">10–<span class="count" data-count="20">0</span>×</span>
+      <span class="stat-label">the cyclic life of heavy single-wall bellows</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= COMPANY ============================= -->
+<section class="section dark" id="company">
+  <div class="shell">
+    <p class="eyebrow"><span>The company</span><span class="eyebrow-brand">Stanflex</span></p>
+    <div class="split">
+      <div class="split-copy">
+        <h2 class="reveal">Engineered flexibility for critical piping.</h2>
+        <p class="reveal">Every piping system must make adequate provision for the expansion and contraction that comes with temperature change — along with distortion, misalignment, vibration and movement in many directions. Metallic bellows expansion joints are the most modern and economical way to absorb these movements: compared with pipe loops and slip joints, they accommodate movement in several directions, eliminate costly maintenance and require far less space.</p>
+        <p class="reveal">STANFLEX multi-ply bellows are the result of years of experience. Building the bellows wall from several thin plies gives the combined strength of many layers against internal pressure, while retaining the flexibility and movement capacity of each individual thin ply.</p>
+        <p class="reveal">A standard range meets almost every expansion problem in practice — made possible by long experience and an in-house computer design facility that continuously optimises every corrugation parameter for each diameter. Beyond the standard range, we design and manufacture bellows for special applications.</p>
+      </div>
+      <figure class="split-media reveal">
+        <img src="assets/img/bellows-duotone.jpg" alt="STANFLEX multi-ply bellows and flanged expansion joints" loading="lazy" width="1504" height="823">
+        <figcaption>Multi-ply bellows and flanged joints, photographed at our Vadodara works.</figcaption>
+      </figure>
+    </div>
+
+    <h3 class="apps-heading reveal">Recommended applications</h3>
+    <ul class="chip-grid" data-stagger>
+      <li>Steam</li><li>Vacuum</li><li>Petro-chemical</li><li>Cryogenics</li>
+      <li>Hot water</li><li>Chilled water</li><li>Utilities</li><li>Diesel exhaust</li>
+      <li>Solar</li><li>Steel processing</li><li>Environment</li><li>Waste treatment</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================= ENGINEERING ============================= -->
+<section class="section light" id="engineering">
+  <div class="shell">
+    <p class="eyebrow"><span>Engineering</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Corrugation geometry &amp; multi-ply construction.</h2>
+    <p class="lead reveal">The shape of every corrugation is decided by a small set of parameters, continuously optimised for each diameter by our in-house design facility:</p>
+
+    <ul class="param-grid" data-stagger>
+      <li><b>d</b> inside diameter</li>
+      <li><b>h</b> corrugation height</li>
+      <li><b>r<sub>i</sub></b> lower corrugation radius</li>
+      <li><b>r<sub>a</sub></b> upper corrugation radius</li>
+      <li><b>p</b> pitch</li>
+      <li><b>s</b> total wall thickness</li>
+      <li><b>n</b> number of plies</li>
+      <li><b>t</b> unit ply thickness</li>
+    </ul>
+
+    <!-- Animated corrugation cross-section. The profile path is drawn on scroll
+         (stroke-dashoffset scrubbed by GSAP ScrollTrigger in main.js). -->
+    <figure class="corrugation-fig reveal" aria-label="Cross-section of a multi-ply bellows corrugation with dimension labels">
+      <svg viewBox="0 0 760 300" class="corrugation-svg" role="img">
+        <!-- centre line = pipe axis -->
+        <line x1="20" y1="262" x2="740" y2="262" class="c-axis"/>
+        <text x="732" y="252" class="c-note" text-anchor="end">pipe axis</text>
+
+        <!-- multi-ply corrugated wall: three parallel strokes = three plies -->
+        <path id="corr-ply-outer" class="c-ply c-ply-outer" d="M40 160 L70 160 A30 30 0 0 1 100 130 L100 96 A30 30 0 0 1 160 96 L160 130 A30 30 0 0 0 220 130 L220 96 A30 30 0 0 1 280 96 L280 130 A30 30 0 0 0 340 130 L340 96 A30 30 0 0 1 400 96 L400 130 A30 30 0 0 0 460 130 L460 96 A30 30 0 0 1 520 96 L520 130 A30 30 0 0 0 580 130 L580 96 A30 30 0 0 1 640 96 L640 130 A30 30 0 0 1 670 160 L700 160"/>
+        <use href="#corr-ply-outer" class="c-ply c-ply-mid" y="7"/>
+        <use href="#corr-ply-outer" class="c-ply c-ply-inner" y="14"/>
+
+        <!-- dimension: pitch p -->
+        <line x1="160" y1="70" x2="220" y2="70" class="c-dim"/>
+        <line x1="160" y1="62" x2="160" y2="92" class="c-dim-tick"/>
+        <line x1="220" y1="62" x2="220" y2="92" class="c-dim-tick"/>
+        <text x="190" y="60" class="c-label" text-anchor="middle">p</text>
+
+        <!-- dimension: corrugation height h -->
+        <line x1="718" y1="96" x2="718" y2="174" class="c-dim"/>
+        <line x1="702" y1="96" x2="734" y2="96" class="c-dim-tick"/>
+        <line x1="702" y1="174" x2="734" y2="174" class="c-dim-tick"/>
+        <text x="726" y="140" class="c-label">h</text>
+
+        <!-- dimension: d/2 from axis to root -->
+        <line x1="40" y1="180" x2="40" y2="262" class="c-dim"/>
+        <text x="26" y="225" class="c-label" text-anchor="end">d/2</text>
+
+        <!-- radii callouts -->
+        <text x="128" y="150" class="c-label" text-anchor="middle">r<tspan class="c-sub" dy="3">i</tspan></text>
+        <text x="252" y="88" class="c-label" text-anchor="middle">r<tspan class="c-sub" dy="3">a</tspan></text>
+      </svg>
+      <figcaption>multi-ply wall — <b>n</b> thin plies, each of thickness <b>t</b> &nbsp;(total thickness s&nbsp;=&nbsp;n&nbsp;×&nbsp;t)</figcaption>
+    </figure>
+
+    <p class="reveal">For a corrugation of fixed shape, increasing the thickness of a single ply reduces the stress due to pressure — but increases the stress due to movement. Multi-ply construction overcomes this limitation and meets special pressure and travel requirements together. STANFLEX manufactures:</p>
+
+    <div class="two-cards" data-stagger>
+      <article class="card-rule">
+        <h3>Single-ply bellows</h3>
+        <p>One wall of optimised thickness. Available in all sizes, for duties where pressure and movement requirements are moderate.</p>
+      </article>
+      <article class="card-rule">
+        <h3>Multi-ply bellows</h3>
+        <p>Two or more thin plies formed by an exclusive corrugating process. The plies share the pressure load while each stays thin and flexible — suitable for the most critical pressure and movement problems.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 3D LAB ============================= -->
+<section class="section dark" id="lab">
+  <div class="shell">
+    <p class="eyebrow"><span>Interactive 3D lab</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Put a STANFLEX joint on your bench.</h2>
+    <p class="lead reveal">Rotate, zoom and actuate a parametric model of a STANFLEX multi-ply expansion joint. Switch configurations, change the convolution count, open the section cut to see the plies — then drive the movement the joint is designed to absorb.</p>
+
+    <div class="lab-layout reveal">
+      <div class="lab-stage" id="lab-stage">
+        <canvas id="lab-canvas" aria-label="Interactive 3D model of a STANFLEX expansion joint"></canvas>
+        <div class="lab-hud">
+          <span class="hud-chip" id="lab-model-name">Axial · flanged ends</span>
+          <button class="hud-btn" id="lab-reset" type="button">Reset view</button>
+        </div>
+        <p class="lab-help" aria-hidden="true">Drag&nbsp;·&nbsp;rotate&nbsp;&nbsp;/&nbsp;&nbsp;Scroll&nbsp;·&nbsp;zoom&nbsp;&nbsp;/&nbsp;&nbsp;Right-drag&nbsp;·&nbsp;pan</p>
+        <!-- Shown only if WebGL is unavailable -->
+        <div class="webgl-fallback" id="webgl-fallback" hidden>
+          <p>Your browser could not start WebGL, so the interactive model is unavailable. The full product data is below — and we are happy to send drawings for any joint: <a href="mailto:stanflex@standardprecisionbellows.com">stanflex@standardprecisionbellows.com</a></p>
+        </div>
+      </div>
+
+      <aside class="lab-panel" aria-label="3D model controls">
+        <div class="panel-block">
+          <span class="panel-label">Configuration</span>
+          <div class="seg" role="group" aria-label="Configuration" id="cfg-seg">
+            <button type="button" data-cfg="axial" class="is-active">Axial</button>
+            <button type="button" data-cfg="universal">Universal</button>
+            <button type="button" data-cfg="lateral">Lateral</button>
+            <button type="button" data-cfg="angular">Angular</button>
+          </div>
+        </div>
+
+        <div class="panel-block">
+          <span class="panel-label">End fittings</span>
+          <div class="seg" role="group" aria-label="End fittings" id="ends-seg">
+            <button type="button" data-ends="flanged" class="is-active">Flanged</button>
+            <button type="button" data-ends="weld">Weld ends</button>
+          </div>
+        </div>
+
+        <div class="panel-block">
+          <label class="panel-label" for="conv-range">Convolutions <output id="conv-out">12</output></label>
+          <input type="range" id="conv-range" min="6" max="18" step="1" value="12">
+        </div>
+
+        <div class="panel-block">
+          <span class="panel-label">Plies (wall build-up)</span>
+          <div class="seg" role="group" aria-label="Number of plies" id="plies-seg">
+            <button type="button" data-plies="1">1</button>
+            <button type="button" data-plies="2">2</button>
+            <button type="button" data-plies="3" class="is-active">3</button>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="cutaway-check">
+            <span>Section cut — look inside the multi-ply wall</span>
+          </label>
+        </div>
+
+        <div class="panel-block">
+          <label class="panel-label" for="move-range"><span id="move-label">Axial travel</span> <output id="move-out">0%</output></label>
+          <input type="range" id="move-range" min="-100" max="100" step="1" value="0">
+          <button class="btn btn-ghost btn-small" id="cycle-btn" type="button" aria-pressed="false">▶ Run movement cycle</button>
+        </div>
+
+        <p class="panel-note" id="cfg-note">Absorbs axial extension and compression within a single bellows element.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CONFIGURATIONS ============================= -->
+<section class="section light" id="configurations">
+  <div class="shell">
+    <p class="eyebrow"><span>Configurations</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Nine ways to absorb movement.</h2>
+    <p class="lead reveal">Axial, universal, lateral and angular arrangements — supplied with weld ends, flanged ends or vanstone faces, plain or pressure balanced, to suit the layout of your line. The arrows show the primary movement each arrangement absorbs.</p>
+
+    <div class="config-grid" data-stagger>
+
+      <article class="config-card" data-lab="axial">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <rect x="88" y="38" width="64" height="44" class="d-bellows"/>
+          <path d="M170 22h44" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Axial</h3>
+        <p>Absorbs axial extension and compression within a single bellows element.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="axial">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <line x1="30" y1="26" x2="30" y2="94" class="d-anchor"/>
+          <line x1="210" y1="26" x2="210" y2="94" class="d-anchor"/>
+          <line x1="30" y1="32" x2="210" y2="32" class="d-rod"/>
+          <line x1="30" y1="88" x2="210" y2="88" class="d-rod"/>
+          <rect x="58" y="42" width="44" height="36" class="d-bellows"/>
+          <rect x="138" y="42" width="44" height="36" class="d-bellows"/>
+          <path d="M176 16h40" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Pressure balanced axial</h3>
+        <p>Balancing bellows and tie rods cancel the pressure thrust, protecting equipment and light anchors.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="axial">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <path d="M120 60v34" class="d-pipe"/>
+          <line x1="20" y1="30" x2="20" y2="90" class="d-anchor"/>
+          <line x1="222" y1="30" x2="222" y2="90" class="d-anchor"/>
+          <rect x="48" y="42" width="44" height="36" class="d-bellows"/>
+          <rect x="150" y="42" width="44" height="36" class="d-bellows"/>
+          <path d="M180 20h40" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Pressure balanced axial, with elbow</h3>
+        <p>Pressure-balanced action arranged at a change of direction in the line.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="universal">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <rect x="58" y="40" width="40" height="40" class="d-bellows"/>
+          <rect x="142" y="40" width="40" height="40" class="d-bellows"/>
+          <path d="M178 18h36" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+          <path d="M224 40v40" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Universal</h3>
+        <p>Two bellows with a centre spool absorb large lateral movement together with axial travel.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="universal">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <line x1="28" y1="28" x2="28" y2="92" class="d-anchor"/>
+          <line x1="212" y1="28" x2="212" y2="92" class="d-anchor"/>
+          <line x1="28" y1="34" x2="212" y2="34" class="d-rod"/>
+          <line x1="28" y1="86" x2="212" y2="86" class="d-rod"/>
+          <rect x="58" y="42" width="38" height="36" class="d-bellows"/>
+          <rect x="144" y="42" width="38" height="36" class="d-bellows"/>
+          <path d="M222 42v36" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Pressure balanced universal</h3>
+        <p>Universal action with the pressure thrust balanced out of the system.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="universal">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <path d="M120 60v34" class="d-pipe"/>
+          <rect x="44" y="42" width="40" height="36" class="d-bellows"/>
+          <rect x="152" y="42" width="40" height="36" class="d-bellows"/>
+          <path d="M226 42v36" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+          <path d="M182 20h36" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Pressure balanced universal, with elbow</h3>
+        <p>Combined lateral absorption and thrust balance at an elbow or tee.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="lateral">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <line x1="46" y1="30" x2="46" y2="90" class="d-anchor"/>
+          <line x1="194" y1="30" x2="194" y2="90" class="d-anchor"/>
+          <line x1="46" y1="36" x2="194" y2="36" class="d-rod"/>
+          <line x1="46" y1="84" x2="194" y2="84" class="d-rod"/>
+          <rect x="64" y="42" width="36" height="36" class="d-bellows"/>
+          <rect x="140" y="42" width="36" height="36" class="d-bellows"/>
+          <path d="M222 40v40" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Lateral</h3>
+        <p>Tie-rod restrained; absorbs lateral offset while the rods carry the pressure thrust.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="lateral">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <line x1="46" y1="30" x2="46" y2="90" class="d-anchor"/>
+          <line x1="194" y1="30" x2="194" y2="90" class="d-anchor"/>
+          <line x1="46" y1="36" x2="194" y2="36" class="d-rod"/>
+          <line x1="46" y1="84" x2="194" y2="84" class="d-rod"/>
+          <circle cx="46" cy="36" r="5" class="d-sphere"/>
+          <circle cx="194" cy="36" r="5" class="d-sphere"/>
+          <circle cx="46" cy="84" r="5" class="d-sphere"/>
+          <circle cx="194" cy="84" r="5" class="d-sphere"/>
+          <rect x="64" y="42" width="36" height="36" class="d-bellows"/>
+          <rect x="140" y="42" width="36" height="36" class="d-bellows"/>
+          <path d="M222 40v40" class="d-arrow" marker-start="url(#arr-l)" marker-end="url(#arr-r)"/>
+        </svg>
+        <h3>Spherical lateral</h3>
+        <p>Spherical tie-rod seats allow lateral movement in any plane.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+
+      <article class="config-card" data-lab="angular">
+        <svg viewBox="0 0 240 110" class="cfg-svg" aria-hidden="true">
+          <line x1="10" y1="60" x2="230" y2="60" class="d-pipe"/>
+          <rect x="94" y="38" width="52" height="44" class="d-bellows"/>
+          <rect x="84" y="30" width="72" height="7" class="d-hinge"/>
+          <rect x="84" y="83" width="72" height="7" class="d-hinge"/>
+          <circle cx="120" cy="33.5" r="3.4" class="d-pin"/>
+          <circle cx="120" cy="86.5" r="3.4" class="d-pin"/>
+          <path d="M170 30a52 52 0 0 1 34 14" class="d-arrow" marker-end="url(#arr-r)" fill="none"/>
+        </svg>
+        <h3>Angular (hinged)</h3>
+        <p>Hinges restrict movement to angular rotation in one plane; normally used in sets of two or three.</p>
+        <button class="cfg-open" type="button">View in 3D →</button>
+      </article>
+    </div>
+
+    <div class="note-band reveal">
+      <p>Not sure which configuration suits your layout? <b>Send us a sketch of the line</b> with anchor positions, together with the service conditions, and we will recommend and size the joint for you.</p>
+      <a class="btn btn-solid" href="mailto:stanflex@standardprecisionbellows.com?subject=Configuration%20selection%20—%20line%20sketch%20attached">Send a sketch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= STANDARD RANGE ============================= -->
+<section class="section dark" id="range">
+  <div class="shell">
+    <p class="eyebrow"><span>Standard range</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Standard design — up to <span id="range-pressure-word">6</span>&nbsp;kg/cm².</h2>
+    <p class="lead reveal">STANFLEX multi-ply expansion joints, standard design. Pick the working-pressure series, then filter by nominal bore or part number.</p>
+
+    <div class="range-tools reveal">
+      <div class="seg" role="group" aria-label="Maximum working pressure" id="pressure-seg">
+        <button type="button" data-series="p6" class="is-active">up to 6 kg/cm²</button>
+        <button type="button" data-series="p10">up to 10 kg/cm²</button>
+      </div>
+      <select id="nb-filter" aria-label="Filter by nominal bore">
+        <option value="">All nominal bores</option>
+      </select>
+      <input type="search" id="range-search" placeholder="Search part no. …" aria-label="Search part number">
+      <span class="range-count" id="range-count"></span>
+    </div>
+
+    <!-- OAL legend, mirrors the catalogue's dimension sketch -->
+    <div class="oal-legend reveal" aria-hidden="true">
+      <svg viewBox="0 0 340 74">
+        <line x1="8" y1="40" x2="332" y2="40" class="d-pipe"/>
+        <rect x="120" y="20" width="100" height="40" class="d-bellows"/>
+        <line x1="120" y1="12" x2="220" y2="12" class="d-dim"/>
+        <text x="170" y="8" class="d-dimtext" text-anchor="middle">OAL</text>
+        <line x1="234" y1="20" x2="234" y2="60" class="d-dim"/>
+        <text x="244" y="34" class="d-dimtext">OD</text>
+        <line x1="106" y1="26" x2="106" y2="54" class="d-dim"/>
+        <text x="96" y="34" class="d-dimtext" text-anchor="end">ID</text>
+      </svg>
+      <p>OAL — overall length, quoted for weld ends and flanged ends. Axial extension (+) and compression (−) are measured from free length.</p>
+    </div>
+
+    <div class="table-wrap reveal" tabindex="0" role="region" aria-label="Standard range data table">
+      <table class="range-table" id="range-table">
+        <thead>
+          <tr>
+            <th>Part No.</th><th>NB<br>mm</th><th>I.D.<br>mm</th><th>O.D.<br>mm</th>
+            <th>OAL<br>weld ends</th><th>OAL<br>flanged</th>
+            <th>Axial ext.<br>+ mm</th><th>Axial comp.<br>− mm</th><th>Total<br>travel mm</th>
+            <th>Spring rate<br>kg/mm</th><th>Eff. area<br>cm²</th>
+          </tr>
+        </thead>
+        <tbody><!-- rows rendered by js/main.js from js/data.js --></tbody>
+      </table>
+    </div>
+
+    <p class="fine-print reveal">All dimensions in mm. + axial extension and − axial compression are measured from free length. Values are for guidance and are confirmed at the time of order. Custom lengths, movements and higher pressures are available on request.</p>
+  </div>
+</section>
+
+<!-- ============================= SPECIAL JOINTS ============================= -->
+<section class="section light" id="special">
+  <div class="shell">
+    <p class="eyebrow"><span>Special joints</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">When the duty is anything but standard.</h2>
+    <p class="lead reveal">Standard Precision Bellows has great depth of experience in the design and manufacture of special expansion joints. These special joints are available to you:</p>
+
+    <div class="special-grid" data-stagger>
+      <article class="special-card">
+        <span class="special-num">01</span>
+        <h3>High pressure</h3>
+        <p>For requirements up to 100 kg/cm², reinforced expansion joints are manufactured from relatively thick-gauge bellows of single or multi-ply construction. The roots are ring-reinforced with T-section back-up rings, and the weld ends and centre tubes are heavy-walled and X-ray inspected.</p>
+      </article>
+      <article class="special-card">
+        <span class="special-num">02</span>
+        <h3>Refractory lined</h3>
+        <p>For very high temperatures up to 1300 °C combined with pressures of 1–15 kg/cm². Studs or mesh on a heavy liner carry an air-cured or heat-cured refractory to suit the duty — typically flue-gas regenerators, steel-mill blast mains and cement-plant ducting.</p>
+      </article>
+      <article class="special-card">
+        <span class="special-num">03</span>
+        <h3>PTFE (Teflon) lined</h3>
+        <p>Where highly corrosive applications are encountered, we recommend a PTFE-lined joint: the inside of the bellows, and of the weld ends or vanstone faces, is PTFE coated. Applications include pulp &amp; paper, sewage and chemical plants.</p>
+      </article>
+      <article class="special-card">
+        <span class="special-num">04</span>
+        <h3>Deep corrugation</h3>
+        <p>Certain systems call for corrugations of unusual depth. Bellows with corrugations over 300 mm deep have been manufactured by Standard Precision Bellows.</p>
+      </article>
+    </div>
+
+    <blockquote class="quote-band reveal">
+      <p>“Shape, size, pressure and temperature are <em>no bar to us</em>.”</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============================= QUALITY ============================= -->
+<section class="section dark" id="quality">
+  <div class="shell">
+    <p class="eyebrow"><span>Quality assurance</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Tested before it ever sees your line.</h2>
+    <p class="lead reveal">At STANFLEX, skilled people and a great deal of equipment are employed to ensure a high level of workmanship. Automatic TIG welding with programmable equipment ensures the same precision throughout the whole range of bellows production — and stabilised type 321 stainless steel is the standard bellows material.</p>
+
+    <div class="qa-layout">
+      <ol class="qa-list" data-stagger>
+        <li><span class="qa-key">A</span><div><h3>Materials</h3><p>Chemical and mechanical analysis of the materials for bellows, pipe ends, flanges and accessories.</p></div></li>
+        <li><span class="qa-key">B</span><div><h3>Welds</h3><p>Radiography and dye-penetrant tests on the welding of the cylinder to bellows, bellows to pipe ends, and hardware.</p></div></li>
+        <li><span class="qa-key">C</span><div><h3>Behaviour</h3><p>Spring-rate and life-cycle testing of the bellows.</p></div></li>
+        <li><span class="qa-key">D</span><div><h3>Complete unit</h3><p>Internal pressure testing of the finished joint — hydraulic, pneumatic and helium leak tests.</p></div></li>
+      </ol>
+
+      <div class="qa-side" data-stagger>
+        <article class="card-rule on-dark">
+          <h3>Helium leak detection</h3>
+          <p>Every bellows undergoes a high-vacuum test in which, thanks to the molecular structure of helium gas, the sensor picks up any minute fault in the bellows unit.</p>
+        </article>
+        <article class="card-rule on-dark">
+          <h3>No limits on size or shape</h3>
+          <p>Sizes and shapes are no limitation — bellows can be supplied from 15 mm up to 5 metres in diameter.</p>
+        </article>
+        <article class="card-rule on-dark">
+          <h3>Certified acceptance</h3>
+          <p>Acceptance tests are carried out by us or by outside inspection organisations, and test certificates are issued whenever acceptance-test requirements are specified in the order.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= INSTALLATION ============================= -->
+<section class="section light" id="install">
+  <div class="shell">
+    <p class="eyebrow"><span>Installation</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Basic installation data.</h2>
+
+    <div class="install-layout">
+      <ol class="install-list" data-stagger>
+        <li>The pipe must be straight for proper installation, and only one expansion joint shall be used between two anchors.</li>
+        <li>Pipe anchors must be rigid and capable of withstanding the full pressure-thrust load, including a safety factor of at least 4:1.</li>
+        <li>Install proper pipe guides so only axial motion is allowed — the first within four pipe diameters of the joint, the second within fourteen diameters of the first.</li>
+        <li>When field welds are made, ground to the pipe only — never earth the welding set through the expansion joint, and do not allow arcing.</li>
+        <li>Remove shipping bars after installation.</li>
+        <li>Pre-compression may be required if the installation temperature is considerably higher than the minimum temperature of the line.</li>
+        <li>Joints are liquid-penetrant or hydrostatically tested at manufacture — do not hammer test.</li>
+      </ol>
+
+      <aside class="install-aside reveal">
+        <h3>Maximum recommended support spacing</h3>
+        <p>Correct supporting of the pipe is essential under all circumstances. For standard-weight carbon-steel pipe:</p>
+        <div class="table-wrap slim" tabindex="0" role="region" aria-label="Pipe support spacing table">
+          <table class="mini-table" id="support-table">
+            <thead><tr><th>Pipe NB mm</th><th>in.</th><th>Span ft</th><th>Span m</th></tr></thead>
+            <tbody><!-- rows rendered by js/main.js --></tbody>
+          </table>
+        </div>
+        <p class="fine-print">Reference data on request: thermal-expansion tables, pipe-guide spacing charts and a chemical-resistance chart for bellows alloys are available from our engineering office.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CONTACT / CTA ============================= -->
+<section class="section dark contact" id="contact">
+  <div class="shell">
+    <div class="contact-head reveal">
+      <span class="brand-mark big" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="56" height="56">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <h2 class="contact-title">Shape, size, pressure and temperature are <em>no bar to us.</em></h2>
+      <p class="lead">Contact us with your line size, medium, pressure and temperature — we will recommend the correct joint and material for your service.</p>
+      <a class="btn btn-solid btn-big" href="mailto:stanflex@standardprecisionbellows.com?subject=Expansion%20joint%20enquiry">stanflex@standardprecisionbellows.com</a>
+    </div>
+
+    <div class="contact-cols" data-stagger>
+      <div>
+        <h3 class="col-label">Works &amp; office</h3>
+        <address>
+          Standard Precision Bellows<br>
+          2/12, B.I.D.C. Estate, Gorwa,<br>
+          Vadodara (Baroda) – 390 016,<br>
+          Gujarat, India
+        </address>
+      </div>
+      <div>
+        <h3 class="col-label">Enquiries</h3>
+        <p>Phone: <a href="tel:+912652291664">+91 265 2291664</a><br>
+           Phone: <a href="tel:+912653290831">+91 265 3290831</a><br>
+           <a href="mailto:stanflex@standardprecisionbellows.com">stanflex@standardprecisionbellows.com</a></p>
+      </div>
+      <div>
+        <h3 class="col-label">Range</h3>
+        <p>Bellows 15 mm – 5 m diameter<br>
+           Standard designs to 10 kg/cm²<br>
+           Special designs to 100 kg/cm²<br>
+           Refractory lined to 1300 °C</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>STANFLEX · Standard Precision Bellows · Vadodara (Baroda), India</p>
+    <p class="fine-print">All dimensions, movements and ratings shown are indicative and subject to change without notice. Please confirm specifications with Standard Precision Bellows at the time of enquiry or order. © Standard Precision Bellows, Vadodara.</p>
+  </div>
+</footer>
+
+<!-- Shared SVG defs for the configuration diagrams (arrow markers) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--orange)"/>
+    </marker>
+    <marker id="arr-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="var(--orange)"/>
+    </marker>
+  </defs>
+</svg>
+
+<!-- Vendored libraries (classic scripts), data, then UI logic -->
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/main.js" defer></script>
+<!-- 3D scenes load as an ES module so it can import the vendored Three.js -->
+<script src="js/three-scene.js" type="module"></script>
+
+</body>
+</html>
