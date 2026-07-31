@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Engineering — STANFLEX</title>
+  <meta name="description" content="Corrugation geometry and multi-ply construction: the parameters behind every STANFLEX bellows.">
+  <meta name="theme-color" content="#17100a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e25a22'/%3E%3Cg stroke='%23fff7ef' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="engineering.html">
+
+<a class="skip-link" href="#page-main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="STANFLEX home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-word">STANFLEX</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="company.html">Company</a>
+      <a href="engineering.html" class="is-active">Engineering</a>
+      <a href="lab.html">3D&nbsp;Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Range</a>
+      <a href="special.html">Special</a>
+      <a href="quality.html">Quality</a>
+    </nav>
+
+    <a class="btn btn-solid header-cta" href="quote.html">Get a quote</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="page-main">
+<section class="section light" id="engineering">
+  <div class="shell">
+    <p class="eyebrow"><span>Engineering</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Corrugation geometry &amp; multi-ply construction.</h2>
+    <p class="lead reveal">The shape of every corrugation is decided by a small set of parameters, continuously optimised for each diameter by our in-house design facility:</p>
+
+    <ul class="param-grid" data-stagger>
+      <li><b>d</b> inside diameter</li>
+      <li><b>h</b> corrugation height</li>
+      <li><b>r<sub>i</sub></b> lower corrugation radius</li>
+      <li><b>r<sub>a</sub></b> upper corrugation radius</li>
+      <li><b>p</b> pitch</li>
+      <li><b>s</b> total wall thickness</li>
+      <li><b>n</b> number of plies</li>
+      <li><b>t</b> unit ply thickness</li>
+    </ul>
+
+    <!-- Animated corrugation cross-section. The profile path is drawn on scroll
+         (stroke-dashoffset scrubbed by GSAP ScrollTrigger in main.js). -->
+    <figure class="corrugation-fig reveal" aria-label="Cross-section of a multi-ply bellows corrugation with dimension labels">
+      <svg viewBox="0 0 760 300" class="corrugation-svg" role="img">
+        <!-- centre line = pipe axis -->
+        <line x1="20" y1="262" x2="740" y2="262" class="c-axis"/>
+        <text x="732" y="252" class="c-note" text-anchor="end">pipe axis</text>
+
+        <!-- multi-ply corrugated wall: three parallel strokes = three plies -->
+        <path id="corr-ply-outer" class="c-ply c-ply-outer" d="M40 160 L70 160 A30 30 0 0 1 100 130 L100 96 A30 30 0 0 1 160 96 L160 130 A30 30 0 0 0 220 130 L220 96 A30 30 0 0 1 280 96 L280 130 A30 30 0 0 0 340 130 L340 96 A30 30 0 0 1 400 96 L400 130 A30 30 0 0 0 460 130 L460 96 A30 30 0 0 1 520 96 L520 130 A30 30 0 0 0 580 130 L580 96 A30 30 0 0 1 640 96 L640 130 A30 30 0 0 1 670 160 L700 160"/>
+        <use href="#corr-ply-outer" class="c-ply c-ply-mid" y="7"/>
+        <use href="#corr-ply-outer" class="c-ply c-ply-inner" y="14"/>
+
+        <!-- dimension: pitch p -->
+        <line x1="160" y1="70" x2="220" y2="70" class="c-dim"/>
+        <line x1="160" y1="62" x2="160" y2="92" class="c-dim-tick"/>
+        <line x1="220" y1="62" x2="220" y2="92" class="c-dim-tick"/>
+        <text x="190" y="60" class="c-label" text-anchor="middle">p</text>
+
+        <!-- dimension: corrugation height h -->
+        <line x1="718" y1="96" x2="718" y2="174" class="c-dim"/>
+        <line x1="702" y1="96" x2="734" y2="96" class="c-dim-tick"/>
+        <line x1="702" y1="174" x2="734" y2="174" class="c-dim-tick"/>
+        <text x="726" y="140" class="c-label">h</text>
+
+        <!-- dimension: d/2 from axis to root -->
+        <line x1="40" y1="180" x2="40" y2="262" class="c-dim"/>
+        <text x="26" y="225" class="c-label" text-anchor="end">d/2</text>
+
+        <!-- radii callouts -->
+        <text x="128" y="150" class="c-label" text-anchor="middle">r<tspan class="c-sub" dy="3">i</tspan></text>
+        <text x="252" y="88" class="c-label" text-anchor="middle">r<tspan class="c-sub" dy="3">a</tspan></text>
+      </svg>
+      <figcaption>multi-ply wall — <b>n</b> thin plies, each of thickness <b>t</b> &nbsp;(total thickness s&nbsp;=&nbsp;n&nbsp;×&nbsp;t)</figcaption>
+    </figure>
+
+    <p class="reveal">For a corrugation of fixed shape, increasing the thickness of a single ply reduces the stress due to pressure — but increases the stress due to movement. Multi-ply construction overcomes this limitation and meets special pressure and travel requirements together. STANFLEX manufactures:</p>
+
+    <div class="two-cards" data-stagger>
+      <article class="card-rule">
+        <h3>Single-ply bellows</h3>
+        <p>One wall of optimised thickness. Available in all sizes, for duties where pressure and movement requirements are moderate.</p>
+      </article>
+      <article class="card-rule">
+        <h3>Multi-ply bellows</h3>
+        <p>Two or more thin plies formed by an exclusive corrugating process. The plies share the pressure load while each stays thin and flexible — suitable for the most critical pressure and movement problems.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<!-- shared enquiry call-to-action -->
+<section class="page-cta" aria-label="Request a quote">
+  <div class="shell page-cta-inner">
+    <p class="page-cta-title">Shape, size, pressure and temperature are <em>no bar to us.</em></p>
+    <div class="page-cta-actions">
+      <a class="btn btn-solid" href="quote.html">Get a quote</a>
+      <a class="btn btn-ghost" href="lab.html">Open the 3D lab</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>STANFLEX · Standard Precision Bellows · Vadodara (Baroda), India</p>
+    <nav class="footer-nav" aria-label="All pages">
+      <a href="index.html">Home</a>
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Standard range</a>
+      <a href="special.html">Special joints</a>
+      <a href="quality.html">Quality</a>
+      <a href="installation.html">Installation</a>
+      <a href="quote.html">Request a quote</a>
+      <a href="admin.html" class="footer-staff">Staff sign in</a>
+    </nav>
+    <p class="fine-print">All dimensions, movements and ratings shown are indicative and subject to change without notice. Please confirm specifications with Standard Precision Bellows at the time of enquiry or order. © Standard Precision Bellows, Vadodara.</p>
+  </div>
+</footer>
+
+<!-- Shared SVG defs for diagrams (arrow markers) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--orange)"/>
+    </marker>
+    <marker id="arr-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="var(--orange)"/>
+    </marker>
+  </defs>
+</svg>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/enquiries.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enquiries — STANFLEX staff</title>
+  <meta name="description" content="Staff-only inbox of submitted quote enquiries.">
+  <meta name="theme-color" content="#17100a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e25a22'/%3E%3Cg stroke='%23fff7ef' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="admin.html">
+
+<a class="skip-link" href="#page-main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="STANFLEX home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-word">STANFLEX</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D&nbsp;Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Range</a>
+      <a href="special.html">Special</a>
+      <a href="quality.html">Quality</a>
+    </nav>
+
+    <a class="btn btn-solid header-cta" href="quote.html">Get a quote</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="page-main">
+
+<section class="section dark" id="admin">
+  <div class="shell">
+    <p class="eyebrow"><span>Enquiry inbox</span><span class="eyebrow-brand">Staff only</span></p>
+    <h2>Submitted enquiries.</h2>
+    <div id="admin-root">
+      <p class="notice" id="admin-banner" hidden></p>
+
+      <form id="admin-login" class="login-card" hidden>
+        <h3>Staff sign in</h3>
+        <label class="field"><span>Email</span>
+          <input name="email" type="email" required autocomplete="username"></label>
+        <label class="field"><span>Password</span>
+          <input name="password" type="password" required autocomplete="current-password"></label>
+        <button class="btn btn-solid" type="submit">Sign in</button>
+        <p class="form-status" id="login-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="admin-toolbar" id="admin-toolbar" hidden>
+        <span class="range-count" id="admin-count"></span>
+        <button class="btn btn-ghost btn-small" id="admin-refresh" type="button">Refresh</button>
+        <button class="btn btn-ghost btn-small" id="admin-signout" type="button">Sign out</button>
+      </div>
+
+      <div class="enquiry-list" id="enquiry-list"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>STANFLEX · Standard Precision Bellows · Vadodara (Baroda), India</p>
+    <nav class="footer-nav" aria-label="All pages">
+      <a href="index.html">Home</a>
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Standard range</a>
+      <a href="special.html">Special joints</a>
+      <a href="quality.html">Quality</a>
+      <a href="installation.html">Installation</a>
+      <a href="quote.html">Request a quote</a>
+      <a href="admin.html" class="footer-staff">Staff sign in</a>
+    </nav>
+    <p class="fine-print">All dimensions, movements and ratings shown are indicative and subject to change without notice. Please confirm specifications with Standard Precision Bellows at the time of enquiry or order. © Standard Precision Bellows, Vadodara.</p>
+  </div>
+</footer>
+
+<!-- Shared SVG defs for diagrams (arrow markers) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--orange)"/>
+    </marker>
+    <marker id="arr-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="var(--orange)"/>
+    </marker>
+  </defs>
+</svg>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/enquiries.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

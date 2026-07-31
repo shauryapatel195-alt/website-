@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request a Quote — STANFLEX</title>
+  <meta name="description" content="Send your line size, medium, pressure and temperature — STANFLEX will recommend and size the right expansion joint.">
+  <meta name="theme-color" content="#17100a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e25a22'/%3E%3Cg stroke='%23fff7ef' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="quote.html">
+
+<a class="skip-link" href="#page-main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="STANFLEX home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-word">STANFLEX</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D&nbsp;Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Range</a>
+      <a href="special.html">Special</a>
+      <a href="quality.html">Quality</a>
+    </nav>
+
+    <a class="btn btn-solid header-cta" href="quote.html">Get a quote</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="page-main">
+
+<section class="section dark" id="quote">
+  <div class="shell">
+    <p class="eyebrow"><span>Request a quote</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Tell us about your line.</h2>
+    <p class="lead reveal">Share your service conditions and we will recommend and size the right joint. Fields marked * are required — everything else helps us answer faster.</p>
+
+    <div class="quote-layout">
+      <div class="quote-form-wrap reveal">
+        <form id="quote-form" class="quote-form" novalidate>
+          <div class="form-grid">
+            <label class="field"><span>Name *</span>
+              <input name="name" required autocomplete="name"></label>
+            <label class="field"><span>Company</span>
+              <input name="company" autocomplete="organization"></label>
+            <label class="field"><span>Email *</span>
+              <input name="email" type="email" required autocomplete="email"></label>
+            <label class="field"><span>Phone</span>
+              <input name="phone" type="tel" autocomplete="tel"></label>
+            <label class="field"><span>Nominal bore / line size</span>
+              <input name="nb_size" placeholder="e.g. NB 200 mm"></label>
+            <label class="field"><span>Medium</span>
+              <input name="medium" list="medium-list" placeholder="e.g. steam, flue gas">
+              <datalist id="medium-list">
+                <option>Steam</option><option>Hot water</option><option>Chilled water</option>
+                <option>Flue gas</option><option>Diesel exhaust</option><option>Vacuum</option>
+                <option>Petro-chemical</option><option>Cryogenic</option><option>Utilities</option>
+              </datalist></label>
+            <label class="field"><span>Working pressure</span>
+              <input name="pressure" placeholder="e.g. 6 kg/cm²"></label>
+            <label class="field"><span>Temperature</span>
+              <input name="temperature" placeholder="e.g. 250 °C"></label>
+            <label class="field"><span>Movement to absorb</span>
+              <select name="movement">
+                <option value="">Not sure yet</option>
+                <option>Axial</option>
+                <option>Lateral</option>
+                <option>Angular</option>
+                <option>Universal / combined</option>
+              </select></label>
+            <label class="field"><span>Quantity</span>
+              <input name="quantity" inputmode="numeric" placeholder="e.g. 4"></label>
+          </div>
+          <label class="field"><span>Anything else — layout sketch details, anchors, standards, delivery</span>
+            <textarea name="message" rows="5" placeholder="Describe the line, or paste dimensions here"></textarea></label>
+          <div class="form-actions">
+            <button class="btn btn-solid btn-big" type="submit" id="quote-submit">Send enquiry</button>
+            <p class="form-status" id="quote-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <div class="quote-success" id="quote-success" hidden>
+          <h3>Enquiry received.</h3>
+          <p id="quote-success-text">Thank you — we will come back to you with a recommendation and price.</p>
+          <button class="btn btn-ghost" id="quote-again" type="button">Send another enquiry</button>
+        </div>
+      </div>
+
+      <aside class="quote-aside reveal">
+        <div class="card-rule on-dark">
+          <h3>Faster sizing</h3>
+          <p>The four numbers that matter most: pipe NB, medium, working pressure and temperature. With those we can usually size the joint the same day.</p>
+        </div>
+        <div class="contact-cols" data-stagger>
+      <div>
+        <h3 class="col-label">Works &amp; office</h3>
+        <address>
+          Standard Precision Bellows<br>
+          2/12, B.I.D.C. Estate, Gorwa,<br>
+          Vadodara (Baroda) – 390 016,<br>
+          Gujarat, India
+        </address>
+      </div>
+      <div>
+        <h3 class="col-label">Enquiries</h3>
+        <p>Phone: <a href="tel:+912652291664">+91 265 2291664</a><br>
+           Phone: <a href="tel:+912653290831">+91 265 3290831</a><br>
+           <a href="mailto:stanflex@standardprecisionbellows.com">stanflex@standardprecisionbellows.com</a></p>
+      </div>
+      <div>
+        <h3 class="col-label">Range</h3>
+        <p>Bellows 15 mm – 5 m diameter<br>
+           Standard designs to 10 kg/cm²<br>
+           Special designs to 100 kg/cm²<br>
+           Refractory lined to 1300 °C</p>
+      </div>
+    </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>STANFLEX · Standard Precision Bellows · Vadodara (Baroda), India</p>
+    <nav class="footer-nav" aria-label="All pages">
+      <a href="index.html">Home</a>
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Standard range</a>
+      <a href="special.html">Special joints</a>
+      <a href="quality.html">Quality</a>
+      <a href="installation.html">Installation</a>
+      <a href="quote.html">Request a quote</a>
+      <a href="admin.html" class="footer-staff">Staff sign in</a>
+    </nav>
+    <p class="fine-print">All dimensions, movements and ratings shown are indicative and subject to change without notice. Please confirm specifications with Standard Precision Bellows at the time of enquiry or order. © Standard Precision Bellows, Vadodara.</p>
+  </div>
+</footer>
+
+<!-- Shared SVG defs for diagrams (arrow markers) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--orange)"/>
+    </marker>
+    <marker id="arr-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="var(--orange)"/>
+    </marker>
+  </defs>
+</svg>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/enquiries.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

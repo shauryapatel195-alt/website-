@@ -23,16 +23,23 @@ every dependency is vendored in this repository.
 
 ## What's inside
 
+A multi-page static site — no build step, no framework:
+
 | Path | Purpose |
 | --- | --- |
-| `index.html` | The whole site — hero, company, engineering, 3D lab, configurations, standard range, special joints, quality, installation, contact |
-| `css/style.css` | Design system: catalogue-derived tokens (chocolate `#17100a`, orange `#e25a22`, cream paper), Poppins/Inter, responsive layout |
+| `index.html` | Home: 3D hero, brand pillars, stats, company excerpt, section teasers |
+| `company.html` … `installation.html` | One page per catalogue section (company, engineering, 3D lab, configurations, standard range with beginner explainer, special joints, quality, installation) |
+| `quote.html` | Enquiry form (replaces the old mailto link) — writes to Supabase when configured, demo mode otherwise |
+| `admin.html` | Staff inbox: Supabase email sign-in, lists submitted enquiries |
+| `js/config.js` | **Paste your Supabase URL + anon key here** (see `SETUP-SUPABASE.md`) |
+| `js/enquiries.js` | Quote form + inbox client (plain fetch against Supabase REST/Auth, localStorage demo fallback) |
 | `js/three-scene.js` | ES module. Procedural 3D: parametric corrugation profile → LatheGeometry bellows, four joint configurations, ply cutaway, movement drive |
-| `js/main.js` | UI: nav, GSAP scroll reveals & counters, range-table rendering/filtering, 3D lab control bindings |
+| `js/main.js` | Shared UI: nav, GSAP reveals & counters, range-table rendering/filtering, 3D lab bindings — each block guards on its own page's elements |
 | `js/data.js` | Full standard-range tables (6 & 10 kg/cm² series), support-spacing data, configuration copy |
+| `tools/build-artifact.py` | Bundles the whole site into one self-contained HTML file (`dist/`) with a hash router — used for the claude.ai preview |
 | `vendor/` | Three.js r160 (module build) + OrbitControls, GSAP 3.12 + ScrollTrigger |
-| `assets/fonts/` | Self-hosted Poppins (500–800) & Inter (variable), latin subsets |
-| `assets/img/` | Duotone bellows photograph from the catalogue cover |
+| `assets/fonts/`, `assets/img/` | Self-hosted Poppins/Inter subsets, duotone bellows photograph |
+| `SETUP-SUPABASE.md` | 10-minute walkthrough to make the enquiry database live |
 
 ## The 3D lab
 

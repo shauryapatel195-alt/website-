@@ -1,13 +1,15 @@
 /* ==========================================================================
-   STANFLEX — UI logic
-   Navigation, GSAP scroll animations, catalogue table rendering/filtering,
-   and the control bindings for the 3D lab (talks to window.STANFLEX3D,
-   exposed by js/three-scene.js).
+   STANFLEX — UI logic (multi-page)
+   --------------------------------------------------------------------------
+   Every feature block guards on its own elements, so this single file safely
+   serves all pages (index, lab, range, quote, admin, …). The quote form and
+   staff inbox live in js/enquiries.js.
 
-   Design decision: the page is fully readable with JavaScript disabled or
-   failed — animations only *hide* elements after `gsap-ready` is set on
-   <body>, and the tables/3D are progressive enhancements on top of the
-   complete catalogue copy.
+   SPA note: the single-file artifact bundle sets body[data-spa] and swaps
+   "pages" client-side. In that mode scroll-triggered reveals are replaced by
+   an instant show + route transition (see initAnimations), and one-shot
+   animations re-run when their route first becomes visible via the
+   'stanflex-route' event dispatched by the bundle's router.
    ========================================================================== */
 (function () {
   'use strict';
@@ -17,50 +19,66 @@
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
   const prefersReducedMotion =
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SPA = !!document.body.dataset.spa;
 
   /* ================= Header & mobile nav ================= */
   const header = $('#site-header');
   const nav = $('#site-nav');
   const navToggle = $('#nav-toggle');
 
-  addEventListener('scroll', () => {
-    header.classList.toggle('is-scrolled', scrollY > 12);
-  }, { passive: true });
-
-  navToggle.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
-    navToggle.setAttribute('aria-expanded', String(open));
-  });
-  nav.addEventListener('click', e => {
-    if (e.target.matches('a')) {
-      nav.classList.remove('is-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // highlight the nav link of the section in view
-  const sectionForLink = {};
-  $$('.site-nav a').forEach(a => {
-    const id = a.getAttribute('href').slice(1);
-    const sec = document.getElementById(id);
-    if (sec) sectionForLink[id] = a;
-  });
-  const navIO = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if (en.isIntersecting && sectionForLink[en.target.id]) {
-        $$('.site-nav a').forEach(a => a.classList.remove('is-active'));
-        sectionForLink[en.target.id].classList.add('is-active');
+  if (header) {
+    addEventListener('scroll', () => {
+      header.classList.toggle('is-scrolled', scrollY > 12);
+    }, { passive: true });
+  }
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    nav.addEventListener('click', e => {
+      if (e.target.closest('a')) {
+        nav.classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
       }
     });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  Object.keys(sectionForLink).forEach(id => navIO.observe(document.getElementById(id)));
+  }
 
-  /* ================= GSAP scroll animations ================= */
-  if (window.gsap && !prefersReducedMotion) {
+  /* ================= Scroll animations ================= */
+  function drawCorrugation(immediateDelay) {
+    const plyPath = $('#corr-ply-outer');
+    if (!plyPath) return;
+    const len = plyPath.getTotalLength();
+    $$('.c-ply').forEach((el, i) => {
+      el.style.strokeDasharray = len;
+      el.style.strokeDashoffset = len;
+      gsap.to(el, immediateDelay !== undefined
+        ? { strokeDashoffset: 0, duration: 1.8, delay: immediateDelay + i * 0.25, ease: 'power2.inOut' }
+        : {
+            strokeDashoffset: 0, duration: 1.8, delay: i * 0.25, ease: 'power2.inOut',
+            scrollTrigger: { trigger: '.corrugation-fig', start: 'top 80%', once: true }
+          });
+    });
+  }
+
+  function runCounters(withScrollTrigger) {
+    $$('.count').forEach(el => {
+      const end = Number(el.dataset.count);
+      const vars = {
+        textContent: end, duration: 1.6, ease: 'power1.out',
+        snap: { textContent: 1 }
+      };
+      if (withScrollTrigger) {
+        vars.scrollTrigger = { trigger: el, start: 'top 92%', once: true };
+      }
+      gsap.fromTo(el, { textContent: 0 }, vars);
+    });
+  }
+
+  if (window.gsap && !prefersReducedMotion && !SPA) {
     gsap.registerPlugin(ScrollTrigger);
     document.body.classList.add('gsap-ready'); // CSS may now hide pre-reveal
 
-    // single-element reveals
     $$('.reveal').forEach(el => {
       gsap.fromTo(el,
         { y: 30, opacity: 0 },
@@ -71,7 +89,6 @@
         });
     });
 
-    // staggered child reveals (cards, chips, list items…)
     $$('[data-stagger]').forEach(wrap => {
       const items = Array.from(wrap.children);
       gsap.fromTo(items,
@@ -83,95 +100,105 @@
         });
     });
 
-    // hero headline: staggered rise of the two lines + sub
-    gsap.from('.hero-title .line', {
-      y: 60, opacity: 0, duration: 1, ease: 'power4.out', stagger: 0.12, delay: 0.15
-    });
-
-    // stat counters
-    $$('.count').forEach(el => {
-      const end = Number(el.dataset.count);
-      gsap.fromTo(el, { textContent: 0 }, {
-        textContent: end, duration: 1.6, ease: 'power1.out',
-        snap: { textContent: 1 },
-        scrollTrigger: { trigger: el, start: 'top 92%', once: true }
-      });
-    });
-
-    // corrugation cross-section draws itself as it scrolls into view
-    const plyPath = $('#corr-ply-outer');
-    if (plyPath) {
-      const len = plyPath.getTotalLength();
-      $$('.c-ply').forEach((el, i) => {
-        el.style.strokeDasharray = len;
-        el.style.strokeDashoffset = len;
-        gsap.to(el, {
-          strokeDashoffset: 0, duration: 1.8, delay: i * 0.25, ease: 'power2.inOut',
-          scrollTrigger: { trigger: '.corrugation-fig', start: 'top 80%', once: true }
-        });
+    if ($('.hero-title')) {
+      gsap.from('.hero-title .line', {
+        y: 60, opacity: 0, duration: 1, ease: 'power4.out', stagger: 0.12, delay: 0.15
       });
     }
+
+    runCounters(true);
+    drawCorrugation();
+  } else if (window.gsap && !prefersReducedMotion && SPA) {
+    // SPA bundle: routes appear instantly (CSS transition on the route
+    // container). One-shot animations fire when their route first shows.
+    if ($('.hero-title')) {
+      gsap.from('.hero-title .line', {
+        y: 60, opacity: 0, duration: 1, ease: 'power4.out', stagger: 0.12, delay: 0.15
+      });
+    }
+    runCounters(false);
+    let corrDone = false;
+    addEventListener('stanflex-route', e => {
+      if (e.detail.route === 'engineering' && !corrDone) {
+        corrDone = true;
+        drawCorrugation(0.2);
+      }
+    });
   } else {
-    // no GSAP / reduced motion: everything stays visible, counters jump to value
     $$('.count').forEach(el => { el.textContent = el.dataset.count; });
   }
 
-  /* ================= Range table ================= */
+  /* ================= Range table (range.html) ================= */
   const tbody = $('#range-table tbody');
-  const nbFilter = $('#nb-filter');
-  const searchBox = $('#range-search');
-  const countOut = $('#range-count');
-  const pressureWord = $('#range-pressure-word');
-  let series = 'p6';
+  if (tbody && D) {
+    const nbFilter = $('#nb-filter');
+    const searchBox = $('#range-search');
+    const countOut = $('#range-count');
+    const pressureWord = $('#range-pressure-word');
+    let series = 'p6';
 
-  function fmt(n) { return n.toLocaleString('en-IN'); }
+    const fmt = n => n.toLocaleString('en-IN');
 
-  function populateNbFilter() {
-    const nbs = [...new Set(D[series].map(r => r[1]))];
-    const current = nbFilter.value;
-    nbFilter.length = 1; // keep the "All" option
-    nbs.forEach(nb => nbFilter.add(new Option('NB ' + nb + ' mm', nb)));
-    if ([...nbFilter.options].some(o => o.value === current)) nbFilter.value = current;
-  }
+    function populateNbFilter() {
+      const nbs = [...new Set(D[series].map(r => r[1]))];
+      const current = nbFilter.value;
+      nbFilter.length = 1; // keep the "All" option
+      nbs.forEach(nb => nbFilter.add(new Option('NB ' + nb + ' mm', nb)));
+      if ([...nbFilter.options].some(o => o.value === current)) nbFilter.value = current;
+    }
 
-  function renderTable() {
-    const nb = nbFilter.value;
-    const q = searchBox.value.trim().toLowerCase();
-    const rows = D[series].filter(r =>
-      (!nb || String(r[1]) === nb) &&
-      (!q || r[0].toLowerCase().includes(q)));
+    function renderTable() {
+      const nb = nbFilter.value;
+      const q = searchBox.value.trim().toLowerCase();
+      const rows = D[series].filter(r =>
+        (!nb || String(r[1]) === nb) &&
+        (!q || r[0].toLowerCase().includes(q)));
 
-    let lastNb = null;
-    tbody.innerHTML = rows.map(r => {
-      const first = r[1] !== lastNb;
-      lastNb = r[1];
-      return '<tr' + (first ? ' class="nb-first"' : '') + '>' +
-        '<td>' + r[0] + '</td>' +
-        r.slice(1).map(fmt).map(v => '<td>' + v + '</td>').join('') +
-        '</tr>';
-    }).join('');
-    countOut.textContent = rows.length + ' of ' + D[series].length + ' joints shown';
-  }
+      let lastNb = null;
+      tbody.innerHTML = rows.map(r => {
+        const first = r[1] !== lastNb;
+        lastNb = r[1];
+        return '<tr' + (first ? ' class="nb-first"' : '') + '>' +
+          '<td>' + r[0] + '</td>' +
+          r.slice(1).map(fmt).map(v => '<td>' + v + '</td>').join('') +
+          '</tr>';
+      }).join('');
+      countOut.textContent = rows.length + ' of ' + D[series].length + ' joints shown';
+    }
 
-  $('#pressure-seg').addEventListener('click', e => {
-    const btn = e.target.closest('button[data-series]');
-    if (!btn) return;
-    series = btn.dataset.series;
-    $$('#pressure-seg button').forEach(b => b.classList.toggle('is-active', b === btn));
-    pressureWord.textContent = series === 'p6' ? '6' : '10';
+    $('#pressure-seg').addEventListener('click', e => {
+      const btn = e.target.closest('button[data-series]');
+      if (!btn) return;
+      series = btn.dataset.series;
+      $$('#pressure-seg button').forEach(b => b.classList.toggle('is-active', b === btn));
+      pressureWord.textContent = series === 'p6' ? '6' : '10';
+      populateNbFilter();
+      renderTable();
+    });
+    nbFilter.addEventListener('change', renderTable);
+    searchBox.addEventListener('input', renderTable);
     populateNbFilter();
     renderTable();
-  });
-  nbFilter.addEventListener('change', renderTable);
-  searchBox.addEventListener('input', renderTable);
-  populateNbFilter();
-  renderTable();
+  }
 
-  /* ================= Support spacing table ================= */
-  $('#support-table tbody').innerHTML = D.supportSpacing.map(r =>
-    '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] +
-    '</td><td>' + r[3].toFixed(1) + '</td></tr>'
-  ).join('');
+  /* ================= Support spacing table (installation.html) ========== */
+  const supportBody = $('#support-table tbody');
+  if (supportBody && D) {
+    supportBody.innerHTML = D.supportSpacing.map(r =>
+      '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td><td>' + r[2] +
+      '</td><td>' + r[3].toFixed(1) + '</td></tr>'
+    ).join('');
+  }
+
+  /* ================= Segmented buttons: expose state to AT ================ */
+  // .is-active is visual only; mirror it as aria-pressed and keep the two in
+  // sync on every click (covers lab config/ends/plies and range pressure segs)
+  $$('.seg').forEach(seg => {
+    const sync = () => $$('button', seg).forEach(b =>
+      b.setAttribute('aria-pressed', String(b.classList.contains('is-active'))));
+    sync();
+    seg.addEventListener('click', () => requestAnimationFrame(sync));
+  });
 
   /* ================= Range sliders: orange fill tracks the thumb ========= */
   function paintRange(input) {
@@ -185,10 +212,10 @@
     r.addEventListener('input', () => paintRange(r));
   });
 
-  /* ================= 3D lab controls ================= */
+  /* ================= 3D lab controls (lab.html) ================= */
   function bindLab() {
     const api = window.STANFLEX3D;
-    if (!api || !api.ok) return;
+    if (!api || !api.ok || !$('#cfg-seg')) return;
 
     const cfgSeg = $('#cfg-seg');
     const endsSeg = $('#ends-seg');
@@ -223,11 +250,10 @@
         paintRange(moveRange);
       }
     }
-
-    cfgSeg.addEventListener('click', e => {
-      const btn = e.target.closest('button[data-cfg]');
+    function applyConfig(c) {
+      const btn = $('#cfg-seg button[data-cfg="' + c + '"]');
       if (!btn) return;
-      config = btn.dataset.cfg;
+      config = c;
       setActive(cfgSeg, btn);
       stopCycle();
       api.setConfig(config);
@@ -236,6 +262,11 @@
       moveLabel.textContent = D.moveLabels[config];
       note.textContent = D.configNotes[config];
       updateHud();
+    }
+
+    cfgSeg.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-cfg]');
+      if (btn) applyConfig(btn.dataset.cfg);
     });
 
     endsSeg.addEventListener('click', e => {
@@ -274,7 +305,6 @@
       api.setCycle(on);
     });
 
-    // the running cycle drives the slider so the UI mirrors the model
     api.onCycle(m => {
       moveRange.value = Math.round(m * 100);
       moveOut.textContent = Math.round(m * 100) + '%';
@@ -283,18 +313,14 @@
 
     $('#lab-reset').addEventListener('click', () => api.resetView());
 
-    // configuration cards: jump into the lab with the matching model loaded
-    $$('.config-card').forEach(card => {
-      const open = $('.cfg-open', card);
-      if (!open) return;
-      open.addEventListener('click', () => {
-        const cfg = card.dataset.lab;
-        const btn = $('#cfg-seg button[data-cfg="' + cfg + '"]');
-        if (btn) btn.click();
-        document.getElementById('lab').scrollIntoView({
-          behavior: prefersReducedMotion ? 'auto' : 'smooth'
-        });
-      });
+    // deep link: lab.html?cfg=universal (the SPA router forwards its own
+    // hash query through the same event)
+    const param = new URLSearchParams(location.search).get('cfg');
+    if (param) applyConfig(param);
+    addEventListener('stanflex-route', e => {
+      if (e.detail.route === 'lab' && e.detail.query.get('cfg')) {
+        applyConfig(e.detail.query.get('cfg'));
+      }
     });
   }
 

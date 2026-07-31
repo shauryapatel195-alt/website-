@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Standard Range — STANFLEX</title>
+  <meta name="description" content="Complete STANFLEX standard range data for 6 and 10 kg/cm² series, with a beginner's guide to reading the table.">
+  <meta name="theme-color" content="#17100a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e25a22'/%3E%3Cg stroke='%23fff7ef' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="range.html">
+
+<a class="skip-link" href="#page-main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="STANFLEX home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-word">STANFLEX</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D&nbsp;Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html" class="is-active">Range</a>
+      <a href="special.html">Special</a>
+      <a href="quality.html">Quality</a>
+    </nav>
+
+    <a class="btn btn-solid header-cta" href="quote.html">Get a quote</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="page-main">
+<section class="section dark" id="range">
+  <div class="shell">
+    <p class="eyebrow"><span>Standard range</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Standard design — up to <span id="range-pressure-word">6</span>&nbsp;kg/cm².</h2>
+    <p class="lead reveal">STANFLEX multi-ply expansion joints, standard design. Pick the working-pressure series, then filter by nominal bore or part number.</p>
+
+    <details class="explainer reveal" id="range-explainer" open>
+      <summary><span class="explainer-badge">New to expansion joints?</span> How to read this table</summary>
+      <div class="explainer-body">
+        <div class="explainer-cols">
+          <dl class="term-list">
+            <div><dt>Part No.</dt><dd>Encodes the joint: <b>100&#8202;18&#8202;06</b> = NB&nbsp;100&nbsp;mm bore, length code&nbsp;18, rated for the 6&nbsp;kg/cm² series.</dd></div>
+            <div><dt>NB</dt><dd>Nominal bore — the pipe size the joint is made for. Match it to your pipe's NB and you can't go far wrong.</dd></div>
+            <div><dt>I.D. / O.D.</dt><dd>Inside and outside diameter of the bellows itself.</dd></div>
+            <div><dt>OAL</dt><dd>Overall length as supplied — quoted separately for weld ends and flanged ends, so you know the gap it needs in the line.</dd></div>
+            <div><dt>Axial ext. + / comp. −</dt><dd>How far the joint can safely stretch (+) or squeeze (−) from its free length as the pipe moves.</dd></div>
+            <div><dt>Total travel</dt><dd>Extension and compression added together — the full working movement. Pick a row where this comfortably exceeds the movement you calculated.</dd></div>
+            <div><dt>Spring rate</dt><dd>The force (kg) needed to move the joint 1&nbsp;mm. Lower = more flexible = less load on your anchors.</dd></div>
+            <div><dt>Eff. area</dt><dd>The area the line pressure acts on. Pressure × this area is the thrust your pipe anchors must resist.</dd></div>
+          </dl>
+          <div class="explainer-steps">
+            <h3>Choosing a joint in three steps</h3>
+            <ol>
+              <li><b>Match the bore.</b> Find the rows whose NB equals your pipe size.</li>
+              <li><b>Match the pressure.</b> Use the 6&nbsp;kg/cm² series or switch to the 10&nbsp;kg/cm² series if your working pressure is higher.</li>
+              <li><b>Match the movement.</b> Pick the row whose total travel covers the thermal movement of your line, with margin.</li>
+            </ol>
+            <p>Not sure about your movement or pressure? <a href="quote.html">Send us the service conditions</a> — line size, medium, pressure, temperature — and we will size the joint for you.</p>
+          </div>
+        </div>
+      </div>
+    </details>
+
+
+    <div class="range-tools reveal">
+      <div class="seg" role="group" aria-label="Maximum working pressure" id="pressure-seg">
+        <button type="button" data-series="p6" class="is-active">up to 6 kg/cm²</button>
+        <button type="button" data-series="p10">up to 10 kg/cm²</button>
+      </div>
+      <select id="nb-filter" aria-label="Filter by nominal bore">
+        <option value="">All nominal bores</option>
+      </select>
+      <input type="search" id="range-search" placeholder="Search part no. …" aria-label="Search part number">
+      <span class="range-count" id="range-count"></span>
+    </div>
+
+    <!-- OAL legend, mirrors the catalogue's dimension sketch -->
+    <div class="oal-legend reveal" aria-hidden="true">
+      <svg viewBox="0 0 340 74">
+        <line x1="8" y1="40" x2="332" y2="40" class="d-pipe"/>
+        <rect x="120" y="20" width="100" height="40" class="d-bellows"/>
+        <line x1="120" y1="12" x2="220" y2="12" class="d-dim"/>
+        <text x="170" y="8" class="d-dimtext" text-anchor="middle">OAL</text>
+        <line x1="234" y1="20" x2="234" y2="60" class="d-dim"/>
+        <text x="244" y="34" class="d-dimtext">OD</text>
+        <line x1="106" y1="26" x2="106" y2="54" class="d-dim"/>
+        <text x="96" y="34" class="d-dimtext" text-anchor="end">ID</text>
+      </svg>
+      <p>OAL — overall length, quoted for weld ends and flanged ends. Axial extension (+) and compression (−) are measured from free length.</p>
+    </div>
+
+    <div class="table-wrap reveal" tabindex="0" role="region" aria-label="Standard range data table">
+      <table class="range-table" id="range-table">
+        <thead>
+          <tr>
+            <th scope="col">Part No.</th><th scope="col">NB<br>mm</th><th scope="col">I.D.<br>mm</th><th scope="col">O.D.<br>mm</th>
+            <th scope="col">OAL<br>weld ends</th><th scope="col">OAL<br>flanged</th>
+            <th scope="col">Axial ext.<br>+ mm</th><th scope="col">Axial comp.<br>− mm</th><th scope="col">Total<br>travel mm</th>
+            <th scope="col">Spring rate<br>kg/mm</th><th scope="col">Eff. area<br>cm²</th>
+          </tr>
+        </thead>
+        <tbody><!-- rows rendered by js/main.js from js/data.js --></tbody>
+      </table>
+    </div>
+
+    <p class="fine-print reveal">All dimensions in mm. + axial extension and − axial compression are measured from free length. Values are for guidance and are confirmed at the time of order. Custom lengths, movements and higher pressures are available on request.</p>
+  </div>
+</section>
+
+
+</main>
+
+<!-- shared enquiry call-to-action -->
+<section class="page-cta" aria-label="Request a quote">
+  <div class="shell page-cta-inner">
+    <p class="page-cta-title">Shape, size, pressure and temperature are <em>no bar to us.</em></p>
+    <div class="page-cta-actions">
+      <a class="btn btn-solid" href="quote.html">Get a quote</a>
+      <a class="btn btn-ghost" href="lab.html">Open the 3D lab</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>STANFLEX · Standard Precision Bellows · Vadodara (Baroda), India</p>
+    <nav class="footer-nav" aria-label="All pages">
+      <a href="index.html">Home</a>
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Standard range</a>
+      <a href="special.html">Special joints</a>
+      <a href="quality.html">Quality</a>
+      <a href="installation.html">Installation</a>
+      <a href="quote.html">Request a quote</a>
+      <a href="admin.html" class="footer-staff">Staff sign in</a>
+    </nav>
+    <p class="fine-print">All dimensions, movements and ratings shown are indicative and subject to change without notice. Please confirm specifications with Standard Precision Bellows at the time of enquiry or order. © Standard Precision Bellows, Vadodara.</p>
+  </div>
+</footer>
+
+<!-- Shared SVG defs for diagrams (arrow markers) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--orange)"/>
+    </marker>
+    <marker id="arr-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="var(--orange)"/>
+    </marker>
+  </defs>
+</svg>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/enquiries.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

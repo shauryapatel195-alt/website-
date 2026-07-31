@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive 3D Lab — STANFLEX</title>
+  <meta name="description" content="Rotate, zoom and actuate a parametric 3D model of a STANFLEX multi-ply expansion joint.">
+  <meta name="theme-color" content="#17100a">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23e25a22'/%3E%3Cg stroke='%23fff7ef' stroke-width='7' stroke-linecap='round'%3E%3Cpath d='M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Import map: resolves the bare 'three' specifier (used by the 3D module
+       and OrbitControls) to the locally vendored build. No CDN at runtime. -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three.module.min.js" } }
+  </script>
+</head>
+<body data-page="lab.html">
+
+<a class="skip-link" href="#page-main">Skip to content</a>
+
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="index.html" aria-label="STANFLEX home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="34" height="34">
+          <circle cx="32" cy="32" r="32" fill="var(--orange)"/>
+          <g stroke="#fff7ef" stroke-width="7" stroke-linecap="round">
+            <path d="M32 14v36M14 32h36M19.3 19.3l25.4 25.4M44.7 19.3L19.3 44.7"/>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-word">STANFLEX</span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html" class="is-active">3D&nbsp;Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Range</a>
+      <a href="special.html">Special</a>
+      <a href="quality.html">Quality</a>
+    </nav>
+
+    <a class="btn btn-solid header-cta" href="quote.html">Get a quote</a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="page-main">
+<section class="section dark" id="lab">
+  <div class="shell">
+    <p class="eyebrow"><span>Interactive 3D lab</span><span class="eyebrow-brand">Stanflex</span></p>
+    <h2 class="reveal">Put a STANFLEX joint on your bench.</h2>
+    <p class="lead reveal">Rotate, zoom and actuate a parametric model of a STANFLEX multi-ply expansion joint. Switch configurations, change the convolution count, open the section cut to see the plies — then drive the movement the joint is designed to absorb.</p>
+
+    <div class="lab-layout reveal">
+      <div class="lab-stage" id="lab-stage">
+        <canvas id="lab-canvas" aria-label="Interactive 3D model of a STANFLEX expansion joint"></canvas>
+        <div class="lab-hud">
+          <span class="hud-chip" id="lab-model-name">Axial · flanged ends</span>
+          <button class="hud-btn" id="lab-reset" type="button">Reset view</button>
+        </div>
+        <p class="lab-help" aria-hidden="true">Drag&nbsp;·&nbsp;rotate&nbsp;&nbsp;/&nbsp;&nbsp;Scroll&nbsp;·&nbsp;zoom&nbsp;&nbsp;/&nbsp;&nbsp;Right-drag&nbsp;·&nbsp;pan</p>
+        <!-- Shown only if WebGL is unavailable -->
+        <div class="webgl-fallback" id="webgl-fallback" hidden>
+          <p>Your browser could not start WebGL, so the interactive model is unavailable. The full product data is below — and we are happy to send drawings for any joint: <a href="mailto:stanflex@standardprecisionbellows.com">stanflex@standardprecisionbellows.com</a></p>
+        </div>
+      </div>
+
+      <aside class="lab-panel" aria-label="3D model controls">
+        <div class="panel-block">
+          <span class="panel-label">Configuration</span>
+          <div class="seg" role="group" aria-label="Configuration" id="cfg-seg">
+            <button type="button" data-cfg="axial" class="is-active">Axial</button>
+            <button type="button" data-cfg="universal">Universal</button>
+            <button type="button" data-cfg="lateral">Lateral</button>
+            <button type="button" data-cfg="angular">Angular</button>
+          </div>
+        </div>
+
+        <div class="panel-block">
+          <span class="panel-label">End fittings</span>
+          <div class="seg" role="group" aria-label="End fittings" id="ends-seg">
+            <button type="button" data-ends="flanged" class="is-active">Flanged</button>
+            <button type="button" data-ends="weld">Weld ends</button>
+          </div>
+        </div>
+
+        <div class="panel-block">
+          <label class="panel-label" for="conv-range">Convolutions <output id="conv-out">12</output></label>
+          <input type="range" id="conv-range" min="6" max="18" step="1" value="12">
+        </div>
+
+        <div class="panel-block">
+          <span class="panel-label">Plies (wall build-up)</span>
+          <div class="seg" role="group" aria-label="Number of plies" id="plies-seg">
+            <button type="button" data-plies="1">1</button>
+            <button type="button" data-plies="2">2</button>
+            <button type="button" data-plies="3" class="is-active">3</button>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="cutaway-check">
+            <span>Section cut — look inside the multi-ply wall</span>
+          </label>
+        </div>
+
+        <div class="panel-block">
+          <label class="panel-label" for="move-range"><span id="move-label">Axial travel</span> <output id="move-out">0%</output></label>
+          <input type="range" id="move-range" min="-100" max="100" step="1" value="0">
+          <button class="btn btn-ghost btn-small" id="cycle-btn" type="button" aria-pressed="false">▶ Run movement cycle</button>
+        </div>
+
+        <p class="panel-note" id="cfg-note">Absorbs axial extension and compression within a single bellows element.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<!-- shared enquiry call-to-action -->
+<section class="page-cta" aria-label="Request a quote">
+  <div class="shell page-cta-inner">
+    <p class="page-cta-title">Shape, size, pressure and temperature are <em>no bar to us.</em></p>
+    <div class="page-cta-actions">
+      <a class="btn btn-solid" href="quote.html">Get a quote</a>
+      <a class="btn btn-ghost" href="lab.html">Open the 3D lab</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <p>STANFLEX · Standard Precision Bellows · Vadodara (Baroda), India</p>
+    <nav class="footer-nav" aria-label="All pages">
+      <a href="index.html">Home</a>
+      <a href="company.html">Company</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="lab.html">3D Lab</a>
+      <a href="configurations.html">Configurations</a>
+      <a href="range.html">Standard range</a>
+      <a href="special.html">Special joints</a>
+      <a href="quality.html">Quality</a>
+      <a href="installation.html">Installation</a>
+      <a href="quote.html">Request a quote</a>
+      <a href="admin.html" class="footer-staff">Staff sign in</a>
+    </nav>
+    <p class="fine-print">All dimensions, movements and ratings shown are indicative and subject to change without notice. Please confirm specifications with Standard Precision Bellows at the time of enquiry or order. © Standard Precision Bellows, Vadodara.</p>
+  </div>
+</footer>
+
+<!-- Shared SVG defs for diagrams (arrow markers) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="arr-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--orange)"/>
+    </marker>
+    <marker id="arr-l" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M10 0 L0 5 L10 10 z" fill="var(--orange)"/>
+    </marker>
+  </defs>
+</svg>
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="js/data.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/enquiries.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/three-scene.js" type="module"></script>
+
+</body>
+</html>
