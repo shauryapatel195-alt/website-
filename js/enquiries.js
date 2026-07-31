@@ -24,6 +24,7 @@
   const BASE = (cfg.SUPABASE_URL || '').replace(/\/+$/, '');
   const KEY = cfg.SUPABASE_ANON_KEY || '';
   const configured = /^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(BASE) && KEY.length > 20;
+  const OPEN_ADMIN = cfg.ADMIN_OPEN === true; // no sign-in — see js/config.js
 
   const LS_ENQUIRIES = 'stanflex-enquiries';
   const SS_SESSION = 'stanflex-admin-session';
@@ -212,6 +213,14 @@
       addEventListener('stanflex-route', e => {
         if (e.detail.route === 'admin') render(localEnquiries(), true);
       });
+    } else if (OPEN_ADMIN) {
+      // Sign-in disabled (js/config.js: ADMIN_OPEN = true). Anyone with the
+      // admin.html link can read every enquiry — see the warning this
+      // banner shows, and SETUP-SUPABASE.md to turn sign-in back on.
+      banner.hidden = false;
+      banner.textContent = 'Open mode — no staff sign-in is required, so anyone with this page’s link can read every enquiry, including names, emails and phone numbers. Turn sign-in back on when you are ready to go live — see SETUP-SUPABASE.md.';
+      $('#admin-signout').hidden = true;
+      showInbox(null);
     } else {
       const saved = sessionStorage.getItem(SS_SESSION);
       if (saved) showInbox(saved);
@@ -244,6 +253,7 @@
 
     $('#admin-refresh').addEventListener('click', () => {
       if (!configured) render(localEnquiries(), true);
+      else if (OPEN_ADMIN) showInbox(null);
       else showInbox(sessionStorage.getItem(SS_SESSION));
     });
   }
